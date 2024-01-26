@@ -1,0 +1,28 @@
+CREATE DATABASE parcial2rosa;
+
+CREATE TABLE customer_1079412638 (
+  id INT NOT NULL AUTO_INCREMENT,
+  nombre VARCHAR(50) NOT NULL,
+  email VARCHAR(50) NOT NULL,
+  telefono VARCHAR(50) NOT NULL,
+  direccion VARCHAR(50) NOT NULL,
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE product_1079412638 (
+  id INT NOT NULL AUTO_INCREMENT,
+  name VARCHAR(50) NOT NULL,
+  descripcion VARCHAR(50) NOT NULL,
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE customeProduct_1079412638 (
+  id INT NOT NULL AUTO_INCREMENT,
+  customer_id BIGINT NOT NULL,
+  product_id BIGINT NOT NULL,
+  balance DECIMAL(10,2) NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (customer_id) REFERENCES customer_1079412638(id),
+  FOREIGN KEY (product_id) REFERENCES product_1079412638(id),
+  UNIQUE (product_id)
+);
