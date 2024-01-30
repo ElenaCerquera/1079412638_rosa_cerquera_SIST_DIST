@@ -28,7 +28,7 @@ public class UsuarioService implements IUsuarioService {
     }
 
     @Override
-    public UsuarioEntity saveUser(UsuarioEntity usuarioEntity) {
+    public void saveUser(UsuarioEntity usuarioEntity) {
         LocalDateTime fechaHoraActualConMicrosegundos = LocalDateTime.now();
 
         // Truncar a milisegundos
@@ -52,7 +52,7 @@ public class UsuarioService implements IUsuarioService {
         usuario.setState(true);
         usuario.setUpdate_at(null);
         usuario.setDelete_at(null);
-        return usuarioRepository.save(usuario);
+        usuarioRepository.save(usuario);
     }
 
 }

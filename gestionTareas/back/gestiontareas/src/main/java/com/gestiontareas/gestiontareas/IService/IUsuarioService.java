@@ -7,6 +7,6 @@ public interface IUsuarioService {
 
     Boolean login(LoginDto loginDto);
 
-    UsuarioEntity saveUser(UsuarioEntity usuarioEntity);
+    void saveUser(UsuarioEntity usuarioEntity);
 
 }

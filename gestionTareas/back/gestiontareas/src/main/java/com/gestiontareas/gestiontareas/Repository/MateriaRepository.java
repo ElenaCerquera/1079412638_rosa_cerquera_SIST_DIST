@@ -1,11 +1,13 @@
 package com.gestiontareas.gestiontareas.Repository;
 
 import com.gestiontareas.gestiontareas.Entity.MateriaEntity;
+import org.apache.catalina.LifecycleState;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -13,6 +15,8 @@ public interface MateriaRepository extends JpaRepository<MateriaEntity,Long> {
 
 
     Optional<MateriaEntity> findByNombreMateriaAndUsuarioId(String nombreMateria, Long usuarioId);
+
+
 
     /*
     @Query(value = "SELECT m FROM MateriaEntity m JOIN m.usuario u WHERE m.nombreMateria = :nombreMateria AND u.identidad = :identidad",nativeQuery = true)

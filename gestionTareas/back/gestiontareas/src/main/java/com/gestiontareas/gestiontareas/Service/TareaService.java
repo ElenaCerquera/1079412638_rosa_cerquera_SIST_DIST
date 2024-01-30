@@ -1,13 +1,13 @@
 package com.gestiontareas.gestiontareas.Service;
 
-import com.gestiontareas.gestiontareas.Dto.FiltroTareaDto;
-import com.gestiontareas.gestiontareas.Dto.ResponseTareaDto;
-import com.gestiontareas.gestiontareas.Dto.TareaDto;
+import com.gestiontareas.gestiontareas.Dto.*;
 import com.gestiontareas.gestiontareas.Entity.MateriaEntity;
 import com.gestiontareas.gestiontareas.Entity.TareaEntity;
+import com.gestiontareas.gestiontareas.Entity.UsuarioEntity;
 import com.gestiontareas.gestiontareas.IService.ITareaService;
 import com.gestiontareas.gestiontareas.Repository.MateriaRepository;
 import com.gestiontareas.gestiontareas.Repository.TareaRepository;
+import com.gestiontareas.gestiontareas.Repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +25,8 @@ public class TareaService implements ITareaService {
 
     @Autowired
     private MateriaRepository materiaRepository;
+    @Autowired
+    private UsuarioRepository usuRepo;
 
     @Override
     public List<ResponseTareaDto> getListTareasByUser(FiltroTareaDto filtroTareaDto) {
@@ -38,6 +40,8 @@ public class TareaService implements ITareaService {
         }
         return null;
     }
+
+
 
     @Override
     public TareaEntity createTaks(TareaEntity tarea) {
@@ -76,5 +80,33 @@ public class TareaService implements ITareaService {
         return listaResponse;
     }
 
+    public List<ListaTareaDto> obtener (String identidad, String materia ) {
+
+        if (materia.isEmpty()) {
+           return tareaRepository.obt(identidad);
+        }else{
+            return tareaRepository.obtenerconmateria(identidad, materia);
+        }
+
+
+    }
+
+    public void adicionar (AdicionarTareaDTO adicionarTareaDTO)
+    {
+        Long id = usuRepo.obtenerId(adicionarTareaDTO.getIdentidad());
+
+        TareaEntity tare = new TareaEntity();
+        UsuarioEntity usu = new UsuarioEntity();
+        usu.setId(id);
+
+        tare.setNombre(adicionarTareaDTO.getNombre());
+        tare.setDescripcion(adicionarTareaDTO.getDescripcion());
+        tare.setFechaInicio(adicionarTareaDTO.getFechaInicio());
+        tare.setFechaFin(adicionarTareaDTO.getFechaFin());
+        tare.setEstadoTarea(adicionarTareaDTO.getEstadoTarea());
+        tare.setUsuario(usu);
+
+        tareaRepository.save(tare);
+    }
 
 }

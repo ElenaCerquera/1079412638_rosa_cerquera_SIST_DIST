@@ -8,19 +8,20 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/usuario")
+@CrossOrigin("*")
 public class UsuarioController {
 
     @Autowired
     private IUsuarioService iUsuarioService;
 
-    @PostMapping("login")
+    @PostMapping("/login")
     public Boolean login(@RequestBody LoginDto loginDto){
         return iUsuarioService.login(loginDto);
     }
 
-    @PostMapping("save")
-    public Object getUserById(@RequestBody UsuarioEntity usuario){
-        return iUsuarioService.saveUser(usuario);
+    @PostMapping("/save")
+    public void getUserById(@RequestBody UsuarioEntity usuario){
+         iUsuarioService.saveUser(usuario);
     }
 
 
