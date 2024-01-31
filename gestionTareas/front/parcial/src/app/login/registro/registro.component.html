@@ -1,0 +1,40 @@
+<div class="card">
+
+  <h1 class="titulo">REGISTRAR USUARIO</h1>
+  <br>
+
+  <form class="text-center" [formGroup]="RegistroForm">
+    <!-- Para el campo identidad -->
+    <div class="d-flex flex-column align-items-center">
+      <label for="validationTooltip01" class="form-label">Numero de Identidad</label>
+      <input type="text" class="form-control ml-5" id="validationTooltip01" formControlName="identidad" maxlength="10" required [class.is-invalid]="mostrarErrores && RegistroForm.get('identidad')?.invalid && RegistroForm.get('identidad')?.touched" style="width: 200px;">
+      <div *ngIf="mostrarErrores && RegistroForm.get('identidad')?.invalid && RegistroForm.get('identidad')?.touched" class="invalid-feedback">
+        Por favor, ingrese su número de identidad.
+      </div>
+    </div>
+
+    <!-- Para el campo nombre -->
+    <div class="d-flex flex-column align-items-center">
+      <label for="validationTooltip03" class="form-label">Nombre</label>
+      <input type="text" class="form-control ml-5" id="validationTooltip03" formControlName="nombre" required [class.is-invalid]="mostrarErrores && RegistroForm.get('nombre')?.invalid && RegistroForm.get('nombre')?.touched" style="width: 200px;">
+      <div *ngIf="mostrarErrores && RegistroForm.get('nombre')?.invalid && RegistroForm.get('nombre')?.touched" class="invalid-feedback">
+        Por favor, ingrese su nombre.
+      </div>
+    </div>
+
+    <!-- Para el campo contraseña -->
+    <div class="d-flex flex-column align-items-center">
+      <label for="validationTooltip02" class="form-label">Contraseña</label>
+      <input type="text" class="form-control ml-5" id="validationTooltip02" formControlName="contrasena" required [class.is-invalid]="mostrarErrores && RegistroForm.get('contrasena')?.invalid && RegistroForm.get('contrasena')?.touched" style="width: 200px;">
+      <div *ngIf="mostrarErrores && RegistroForm.get('contrasena')?.invalid && RegistroForm.get('contrasena')?.touched" class="invalid-feedback">
+        Por favor, ingrese su contraseña.
+      </div>
+    </div>
+
+    <div class="botones">
+      <button class="ini" (click)="guardar()">Guardar</button>
+      <p class="regis" (click)="iniciar()"> Ya estas registrado?
+      <br >Inicia Sesion</p>
+    </div>
+  </form>
+</div>
