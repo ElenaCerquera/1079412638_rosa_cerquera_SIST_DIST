@@ -41,4 +41,9 @@ public class TareaController {
         service.adicionar(adicionarTareaDTO);
     }
 
+    @GetMapping("/edi/{id}")
+    public List<CEditarDto> ed (@PathVariable Long id){
+        return service.ed(id);
+
+    }
 }

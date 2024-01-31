@@ -24,6 +24,24 @@ public class TareaEntity {
     @Column(name = "estado")
     private String estadoTarea;
 
+    public MateriaEntity getMateria() {
+        return materia;
+    }
+
+    public void setMateria(MateriaEntity materia) {
+        this.materia = materia;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "materia_id")
+    private MateriaEntity materia;
+
+
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private UsuarioEntity usuario;
+
+
     public String getEstadoTarea() {
         return estadoTarea;
     }
@@ -31,13 +49,6 @@ public class TareaEntity {
     public void setEstadoTarea(String estadoTarea) {
         this.estadoTarea = estadoTarea;
     }
-
-    // Relación Muchos a Uno con Usuario
-    @ManyToOne
-    @JoinColumn(name = "usuario_id")
-    private UsuarioEntity usuario;
-
-
 
     public Long getId() {
         return id;

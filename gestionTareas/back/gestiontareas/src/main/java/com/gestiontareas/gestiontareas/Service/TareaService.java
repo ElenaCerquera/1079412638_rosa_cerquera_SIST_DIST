@@ -94,19 +94,28 @@ public class TareaService implements ITareaService {
     public void adicionar (AdicionarTareaDTO adicionarTareaDTO)
     {
         Long id = usuRepo.obtenerId(adicionarTareaDTO.getIdentidad());
+        Optional<MateriaEntity> materia = materiaRepository.findById(adicionarTareaDTO.getId());
 
+        MateriaEntity ma = new MateriaEntity();
+        ma.setId(materia.get().getId());
         TareaEntity tare = new TareaEntity();
         UsuarioEntity usu = new UsuarioEntity();
         usu.setId(id);
 
-        tare.setNombre(adicionarTareaDTO.getNombre());
+        tare.setNombre(materia.get().getNombreMateria());
         tare.setDescripcion(adicionarTareaDTO.getDescripcion());
         tare.setFechaInicio(adicionarTareaDTO.getFechaInicio());
         tare.setFechaFin(adicionarTareaDTO.getFechaFin());
         tare.setEstadoTarea(adicionarTareaDTO.getEstadoTarea());
         tare.setUsuario(usu);
+        tare.setMateria(ma);
 
         tareaRepository.save(tare);
+    }
+
+
+    public List<CEditarDto> ed (Long id){
+        return tareaRepository.edi(id);
     }
 
 }

@@ -1,5 +1,6 @@
 package com.gestiontareas.gestiontareas.Repository;
 
+import com.gestiontareas.gestiontareas.Dto.CEditarDto;
 import com.gestiontareas.gestiontareas.Dto.ListaTareaDto;
 import com.gestiontareas.gestiontareas.Entity.TareaEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,11 +16,11 @@ public interface TareaRepository extends JpaRepository<TareaEntity,Long> {
     List<TareaEntity> findAllByUsuarioId(Long usuarioId);
 
 
-    @Query (value = "select u.nombre AS nombreusuario, t.id AS id, " +
-            "t.nombre AS nombre, t.descripcion AS descripcion," +
-            " t.fecha_inicio AS fechaInicio, t.fecha_fin AS fechaFin, t.estado AS estadoTarea from parcial.usuario u \n" +
-            "Left JOIN parcial.tarea t ON u.id = t.usuario_id\n" +
-            "WHERE u.identidad=:identidad \n",nativeQuery = true)
+    @Query (value = "select u.nombre AS nombreusuario, t.id AS id, \n" +
+            "            t.nombre AS nombre, t.descripcion AS descripcion, m.profesor AS profesor,\n" +
+            "             t.fecha_inicio AS fechaInicio, t.fecha_fin AS fechaFin, t.estado AS estadoTarea from parcial.usuario u \n" +
+            "            Left JOIN parcial.tarea t ON u.id = t.usuario_id left join parcial.materia m ON m.id = t.materia_id\n" +
+            "            WHERE u.identidad=:identidad \n",nativeQuery = true)
     List<ListaTareaDto> obt (@Param("identidad") String identidad);
 
     @Query (value = "select u.nombre AS nombreusuario, t.id AS id, " +
@@ -31,4 +32,10 @@ public interface TareaRepository extends JpaRepository<TareaEntity,Long> {
                                            @Param("materia") String materia
                                            );
 
+    @Query(value = "select   m.id AS id,\n" +
+            "             t.descripcion AS descripcion,\n" +
+            "             t.fecha_inicio AS fechaInicio, t.fecha_fin AS fechaFin, t.estado AS estadoTarea from parcial.usuario u \n" +
+            "            Left JOIN parcial.tarea t ON u.id = t.usuario_id left join parcial.materia m ON m.id = t.materia_id\n" +
+            "            WHERE t.id =:id ", nativeQuery = true)
+    List<CEditarDto> edi (@Param("id")Long id);
 }

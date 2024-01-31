@@ -14,6 +14,16 @@ public class MateriaEntity {
 
     @Column(name = "nombre")
     private String nombreMateria;
+    @Column(name= "profesor")
+    private String profesor;
+
+    public String getProfesor() {
+        return profesor;
+    }
+
+    public void setProfesor(String profesor) {
+        this.profesor = profesor;
+    }
 
     @OneToMany
     private List<UsuarioEntity> usuario;

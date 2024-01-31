@@ -14,4 +14,6 @@ public interface ListaTareaDto {
     @JsonFormat(pattern = "yyyy-MM-dd")
     LocalDate getFechaFin();
     String getEstadoTarea();
+    String getProfesor();
 }
+

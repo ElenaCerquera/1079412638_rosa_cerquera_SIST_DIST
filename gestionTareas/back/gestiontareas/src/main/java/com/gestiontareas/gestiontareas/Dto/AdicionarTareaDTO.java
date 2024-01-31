@@ -7,12 +7,21 @@ import java.util.Date;
 
 public class AdicionarTareaDTO {
 
-    private String nombre;
+    private Long id;
     private String descripcion;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate fechaInicio;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate fechaFin;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     private String estadoTarea;
     private String identidad;
 
@@ -24,13 +33,6 @@ public class AdicionarTareaDTO {
         this.identidad = identidad;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
 
     public String getDescripcion() {
         return descripcion;
